@@ -1,0 +1,163 @@
+{
+  "categorical": {
+    "Country": [
+      "Argentina",
+      "Australia",
+      "Austria",
+      "Belgium",
+      "Brazil",
+      "Bulgaria",
+      "Canada",
+      "China",
+      "Czech Republic",
+      "Denmark",
+      "Finland",
+      "France",
+      "Germany",
+      "Greece",
+      "Hungary",
+      "India",
+      "Ireland",
+      "Israel",
+      "Italy",
+      "Japan",
+      "Mexico",
+      "Netherlands",
+      "New Zealand",
+      "Norway",
+      "Other",
+      "Poland",
+      "Portugal",
+      "Romania",
+      "Russian Federation",
+      "South Africa",
+      "Spain",
+      "Sweden",
+      "Switzerland",
+      "Turkey",
+      "Ukraine",
+      "United Kingdom of Great Britain and Northern Ireland",
+      "United States of America"
+    ],
+    "Education": [
+      "Associate degree",
+      "Bachelor's degree",
+      "Master's degree",
+      "Other",
+      "Professional degree (JD, MD, Ph.D, etc.)",
+      "Secondary school",
+      "Some college study without a degree"
+    ],
+    "Role": [
+      "AI/ML engineer",
+      "Academic researcher",
+      "Applied scientist",
+      "Architect, software or solutions",
+      "Cloud infrastructure engineer",
+      "Cybersecurity or InfoSec professional",
+      "Data engineer",
+      "Data or business analyst",
+      "Data scientist",
+      "DevOps engineer or professional",
+      "Developer, QA or test",
+      "Developer, back-end",
+      "Developer, desktop or enterprise applications",
+      "Developer, embedded applications or devices",
+      "Developer, front-end",
+      "Developer, full-stack",
+      "Developer, game or graphics",
+      "Developer, mobile",
+      "Engineering manager",
+      "Other",
+      "Project manager",
+      "Senior executive (C-suite, VP, etc.)",
+      "System administrator"
+    ],
+    "RemoteWork": [
+      "Hybrid",
+      "In-person",
+      "Remote"
+    ],
+    "OrgSize": [
+      "1,000 to 4,999 employees",
+      "10,000 or more employees",
+      "100 to 499 employees",
+      "20 to 99 employees",
+      "5,000 to 9,999 employees",
+      "500 to 999 employees",
+      "Less than 20 employees"
+    ]
+  },
+  "numeric": {
+    "Experience_Years": {
+      "min": 1.0,
+      "max": 100.0
+    },
+    "Work_Experience_Years": {
+      "min": 1.0,
+      "max": 100.0
+    }
+  },
+  "languages": {
+    "JavaScript": {
+      "min": 0,
+      "max": 1
+    },
+    "HTML/CSS": {
+      "min": 0,
+      "max": 1
+    },
+    "SQL": {
+      "min": 0,
+      "max": 1
+    },
+    "Python": {
+      "min": 0,
+      "max": 1
+    },
+    "Bash/Shell (all shells)": {
+      "min": 0,
+      "max": 1
+    },
+    "TypeScript": {
+      "min": 0,
+      "max": 1
+    },
+    "C#": {
+      "min": 0,
+      "max": 1
+    },
+    "Java": {
+      "min": 0,
+      "max": 1
+    },
+    "PowerShell": {
+      "min": 0,
+      "max": 1
+    },
+    "C++": {
+      "min": 0,
+      "max": 1
+    },
+    "Go": {
+      "min": 0,
+      "max": 1
+    },
+    "C": {
+      "min": 0,
+      "max": 1
+    },
+    "PHP": {
+      "min": 0,
+      "max": 1
+    },
+    "Rust": {
+      "min": 0,
+      "max": 1
+    },
+    "Kotlin": {
+      "min": 0,
+      "max": 1
+    }
+  }
+}
