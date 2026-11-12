@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, Sparkles } from 'lucide-react';
 
 export default function Footer({ onOpenPredictor }) {
   const scrollToTop = () => {
@@ -11,25 +11,26 @@ export default function Footer({ onOpenPredictor }) {
       <footer className="mt-12 py-6 border-t border-slate-200 dark:border-dark-border text-xs text-slate-500 dark:text-gray-400 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
           <span>© 2026 </span>
-          <span className="font-semibold text-slate-900 dark:text-white">shadcn/studio</span>
-          <span>, Made for better web design</span>
+          <span className="font-semibold text-slate-900 dark:text-white">Employee Salary Prediction Model</span>
+          <span> · Stack Overflow 2025 Intelligence</span>
         </div>
 
         <div className="flex items-center gap-6">
-          <a href="#license" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">License</a>
-          <a href="#dashboards" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">More Dashboards</a>
-          <a href="#docs" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Documentation</a>
-          <a href="#support" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Support</a>
+          <a href="#overview" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Overview</a>
+          <a href="#dataset" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">15.9K Dataset</a>
+          <a href="#models" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Quantile Models</a>
+          <a href="https://github.com/jasmndll/salary-prediction-platform" target="_blank" rel="noreferrer" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">GitHub Repo</a>
         </div>
       </footer>
 
-      {/* Floating Action Buttons in bottom right matching Image 4 & 5 */}
+      {/* Floating Action Buttons in bottom right */}
       <div className="fixed bottom-6 right-6 z-40 flex items-center gap-2">
         <button
           onClick={onOpenPredictor}
-          className="h-10 px-4 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-950 font-bold text-xs hover:opacity-90 shadow-2xl transition-transform hover:scale-105 flex items-center gap-1.5"
+          className="h-10 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-2xl shadow-emerald-500/30 transition-transform hover:scale-105 flex items-center gap-1.5"
         >
-          Buy Now
+          <Sparkles className="h-3.5 w-3.5" />
+          Predict Salary
         </button>
         <button
           onClick={scrollToTop}

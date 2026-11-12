@@ -9,7 +9,7 @@ import PredictorModal from './components/PredictorModal';
 import Footer from './components/Footer';
 
 export default function App() {
-  const [currentTab, setCurrentTab] = useState('overview');
+  const [currentTab, setCurrentTab] = useState('analytics');
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [theme, setTheme] = useState('dark');
   const [customizerOpen, setCustomizerOpen] = useState(false);
@@ -35,16 +35,6 @@ export default function App() {
     }
   }, [theme]);
 
-  // Dynamic radius helper
-  const getRadiusClass = () => {
-    switch (radius) {
-      case 'none': return 'rounded-none';
-      case 'sm': return 'rounded-lg';
-      case 'lg': return 'rounded-3xl';
-      default: return 'rounded-2xl';
-    }
-  };
-
   return (
     <div 
       className={`min-h-screen transition-colors duration-200 ${
@@ -54,7 +44,7 @@ export default function App() {
       }`}
       style={{ fontFamily: font }}
     >
-      {/* Sidebar Navigation */}
+      {/* Sidebar Navigation - only Analytics, Data Table, Statistics */}
       <Sidebar 
         currentTab={currentTab}
         setCurrentTab={setCurrentTab}
@@ -82,43 +72,36 @@ export default function App() {
         {/* Dynamic Page Views */}
         <main className={`flex-1 p-4 sm:p-6 lg:p-8 mx-auto w-full ${layout === 'compact' ? 'max-w-7xl' : 'max-w-full'}`}>
           
-          {/* Overview Dashboard (Matching Image 1, 2, 3) */}
-          {(currentTab === 'overview' || currentTab === 'sales' || currentTab === 'finance') && (
+          {/* Page 1: Analytics & ML Overview Dashboard */}
+          {currentTab === 'analytics' && (
             <OverviewDashboard 
               onOpenPredictor={() => setPredictorOpen(true)}
               onGoToDataTable={() => setCurrentTab('datatable')}
+              onGoToStatistics={() => setCurrentTab('statistics')}
             />
           )}
 
-          {/* Data Table Section (Matching Image 4, 5, 7) */}
+          {/* Page 2: Data Table Section */}
           {currentTab === 'datatable' && (
             <DataTableSection 
               onOpenPredictor={() => setPredictorOpen(true)}
             />
           )}
 
-          {/* Statistics & Chart Section */}
-          {(currentTab === 'statistics' || currentTab === 'charts' || currentTab === 'analytics' || currentTab === 'campaign') && (
+          {/* Page 3: Statistics & Model Diagnostics Section */}
+          {currentTab === 'statistics' && (
             <StatisticsSection 
               onOpenPredictor={() => setPredictorOpen(true)}
             />
           )}
 
-          {/* Other fallbacks default to Overview */}
-          {!['overview', 'sales', 'finance', 'datatable', 'statistics', 'charts', 'analytics', 'campaign'].includes(currentTab) && (
-            <OverviewDashboard 
-              onOpenPredictor={() => setPredictorOpen(true)}
-              onGoToDataTable={() => setCurrentTab('datatable')}
-            />
-          )}
-
-          {/* Footer matching reference design */}
+          {/* Footer */}
           <Footer onOpenPredictor={() => setPredictorOpen(true)} />
         </main>
 
       </div>
 
-      {/* Theme Customizer Drawer matching Image 4 */}
+      {/* Theme Customizer Drawer */}
       <ThemeCustomizer 
         isOpen={customizerOpen}
         onClose={() => setCustomizerOpen(false)}

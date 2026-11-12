@@ -11,36 +11,40 @@ import {
   ExternalLink,
   ChevronRight,
   ShieldCheck,
-  CheckCircle2
+  CheckCircle2,
+  Globe2,
+  Cpu,
+  Layers,
+  Award
 } from 'lucide-react';
 import { 
   STAT_CARDS, 
-  TRANSACTION_OVERVIEW, 
-  REPORT_STATS, 
-  TOTAL_SALES, 
-  EARNING_REPORT 
+  EXPERIENCE_OVERVIEW, 
+  CALIBRATION_STATS, 
+  MODALITY_SALES, 
+  FEATURE_IMPORTANCE 
 } from '../data/mockData';
 
-export default function OverviewDashboard({ onOpenPredictor, onGoToDataTable }) {
+export default function OverviewDashboard({ onOpenPredictor, onGoToDataTable, onGoToStatistics }) {
   return (
     <div className="space-y-6">
 
-      {/* 1. TOP STAT CARDS ROW (6 Cards matching Image 1 & 3) */}
+      {/* 1. TOP STAT CARDS ROW (6 Cards matching Image 1 & 3, aligned with ML Project) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
         
-        {/* Card 1: $88.5k -18% Total Profit with two-tone segmented pill bars */}
+        {/* Card 1: $83.3k Overall Median Salary with two-tone segmented pill bars */}
         <div className="rounded-2xl p-4 bg-white border border-slate-200 dark:bg-dark-card dark:border-dark-border shadow-xs flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xl font-bold text-slate-900 dark:text-white">$88.5k</span>
-              <span className="text-xs font-semibold text-rose-500 bg-rose-500/10 px-1.5 py-0.5 rounded">
-                -18%
+              <span className="text-xl font-bold text-slate-900 dark:text-white">$83.3k</span>
+              <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                Median
               </span>
             </div>
-            <p className="text-xs text-slate-500 dark:text-gray-400 mt-1">Total Profit</p>
+            <p className="text-xs text-slate-500 dark:text-gray-400 mt-1">Cohort Median</p>
           </div>
 
-          {/* Segmented Pill Bars matching reference */}
+          {/* Segmented Pill Bars showing quartile density */}
           <div className="flex items-end justify-between gap-1.5 h-24 mt-4 px-1">
             {[
               { teal: 35, purple: 25 },
@@ -49,7 +53,7 @@ export default function OverviewDashboard({ onOpenPredictor, onGoToDataTable }) 
               { teal: 65, purple: 30 },
               { teal: 40, purple: 40 },
             ].map((bar, i) => (
-              <div key={i} className="flex flex-col items-center gap-1 w-full h-full justify-end">
+              <div key={i} className="flex flex-col items-center gap-1 w-full h-full justify-end" title={`Percentile Bucket ${i+1}`}>
                 <div 
                   className="w-2.5 rounded-full bg-emerald-400 transition-all hover:opacity-80" 
                   style={{ height: `${bar.teal}%` }} 
@@ -63,13 +67,13 @@ export default function OverviewDashboard({ onOpenPredictor, onGoToDataTable }) 
           </div>
         </div>
 
-        {/* Card 2: Order Last week 124K +12.6% with bars */}
+        {/* Card 2: Cleaned Cohort 15,940 with bars */}
         <div className="rounded-2xl p-4 bg-white border border-slate-200 dark:bg-dark-card dark:border-dark-border shadow-xs flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-sm font-semibold text-slate-900 dark:text-white">Order</span>
+              <span className="text-sm font-semibold text-slate-900 dark:text-white">Cohort Size</span>
             </div>
-            <p className="text-xs text-slate-500 dark:text-gray-400">Last week</p>
+            <p className="text-xs text-slate-500 dark:text-gray-400">Cleaned v2</p>
           </div>
 
           {/* Vertical Bars: Blue in Dark mode, Orange in Light mode matching Image 3 */}
@@ -88,16 +92,16 @@ export default function OverviewDashboard({ onOpenPredictor, onGoToDataTable }) 
           </div>
 
           <div className="flex items-baseline gap-1 mt-1">
-            <span className="text-base font-bold text-slate-900 dark:text-white">124K</span>
-            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">+12.6%</span>
+            <span className="text-base font-bold text-slate-900 dark:text-white">15,940</span>
+            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">22 Feat</span>
           </div>
         </div>
 
-        {/* Card 3: Profit Last Month 624K +12.6% with green line */}
+        {/* Card 3: Model R² Score 0.5976 with green line */}
         <div className="rounded-2xl p-4 bg-white border border-slate-200 dark:bg-dark-card dark:border-dark-border shadow-xs flex flex-col justify-between">
           <div>
-            <span className="text-sm font-semibold text-slate-900 dark:text-white">Profit</span>
-            <p className="text-xs text-slate-500 dark:text-gray-400">Last Month</p>
+            <span className="text-sm font-semibold text-slate-900 dark:text-white">Model R² Score</span>
+            <p className="text-xs text-slate-500 dark:text-gray-400">Test Evaluation</p>
           </div>
 
           {/* Line Chart SVG with glowing dots */}
@@ -119,19 +123,19 @@ export default function OverviewDashboard({ onOpenPredictor, onGoToDataTable }) 
           </div>
 
           <div className="flex items-baseline gap-1 mt-1">
-            <span className="text-base font-bold text-slate-900 dark:text-white">624K</span>
-            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">+12.6%</span>
+            <span className="text-base font-bold text-slate-900 dark:text-white">0.5976</span>
+            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">~60% R²</span>
           </div>
         </div>
 
-        {/* Card 4: User reach Last week 500 Visitors 32K +12% with radial gauge */}
+        {/* Card 4: Coverage Rate 46.2% with radial gauge */}
         <div className="rounded-2xl p-4 bg-white border border-slate-200 dark:bg-dark-card dark:border-dark-border shadow-xs flex flex-col justify-between">
           <div>
-            <span className="text-sm font-semibold text-slate-900 dark:text-white">User reach</span>
-            <p className="text-xs text-slate-500 dark:text-gray-400">Last week</p>
+            <span className="text-sm font-semibold text-slate-900 dark:text-white">Coverage</span>
+            <p className="text-xs text-slate-500 dark:text-gray-400">P25–P75 Range</p>
           </div>
 
-          {/* Circular Donut Gauge matching Image 1 (Pink) and Image 3 (Orange) */}
+          {/* Circular Donut Gauge matching Image 1 & 3 */}
           <div className="relative flex items-center justify-center h-20 my-2">
             <svg className="w-20 h-20 -rotate-90">
               <circle
@@ -150,23 +154,23 @@ export default function OverviewDashboard({ onOpenPredictor, onGoToDataTable }) 
                 className="stroke-amber-500 dark:stroke-[#f43f5e]"
                 strokeWidth="7"
                 strokeDasharray="188.4"
-                strokeDashoffset="60"
+                strokeDashoffset="75"
                 strokeLinecap="round"
               />
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-xs font-bold text-slate-900 dark:text-white">500</span>
-              <span className="text-[9px] text-slate-500 dark:text-gray-400">Visitors</span>
+              <span className="text-xs font-bold text-slate-900 dark:text-white">46.2%</span>
+              <span className="text-[9px] text-slate-500 dark:text-gray-400">Coverage</span>
             </div>
           </div>
 
           <div className="flex items-baseline gap-1 mt-1">
-            <span className="text-base font-bold text-slate-900 dark:text-white">32K</span>
-            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">+12%</span>
+            <span className="text-base font-bold text-slate-900 dark:text-white">Nominal</span>
+            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">50.0%</span>
           </div>
         </div>
 
-        {/* Card 5: Total Income Last week $4,673 +25.2% with green dollar icon */}
+        {/* Card 5: Remote Work Pay $100.0k with green dollar icon */}
         <div className="rounded-2xl p-4 bg-white border border-slate-200 dark:bg-dark-card dark:border-dark-border shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <div className="h-9 w-9 rounded-xl bg-emerald-500/15 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
@@ -175,65 +179,73 @@ export default function OverviewDashboard({ onOpenPredictor, onGoToDataTable }) 
           </div>
 
           <div className="my-2">
-            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Total Income</h3>
-            <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">Last week</p>
-            <div className="text-xl font-bold text-slate-900 dark:text-white mt-2">$4,673</div>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Remote Median</h3>
+            <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">5,654 Developers</p>
+            <div className="text-xl font-bold text-slate-900 dark:text-white mt-2">$100.0k</div>
           </div>
 
           <div className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 bg-emerald-100 dark:text-emerald-400 dark:bg-emerald-500/10 px-2 py-0.5 rounded w-fit">
-            <span>+25.2%</span>
+            <span>+23.1% vs Hyb</span>
           </div>
         </div>
 
-        {/* Card 6: Total Expense Last month $1.28K -12.2% with blue/orange card icon */}
+        {/* Card 6: Model Test MAE $25,921 with metric icon */}
         <div className="rounded-2xl p-4 bg-white border border-slate-200 dark:bg-dark-card dark:border-dark-border shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <div className="h-9 w-9 rounded-xl bg-amber-500/15 dark:bg-blue-500/15 flex items-center justify-center text-amber-600 dark:text-blue-400">
-              <CreditCard className="h-5 w-5" />
+              <Cpu className="h-5 w-5" />
             </div>
           </div>
 
           <div className="my-2">
-            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Total Expense</h3>
-            <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">Last month</p>
-            <div className="text-xl font-bold text-slate-900 dark:text-white mt-2">$1.28K</div>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Test MAE</h3>
+            <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">Quantile 0.50</p>
+            <div className="text-xl font-bold text-slate-900 dark:text-white mt-2">$25,921</div>
           </div>
 
-          <div className="inline-flex items-center gap-1 text-xs font-semibold text-rose-600 bg-rose-100 dark:text-rose-400 dark:bg-rose-500/10 px-2 py-0.5 rounded w-fit">
-            <span>-12.2%</span>
+          <div className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 bg-emerald-100 dark:text-emerald-400 dark:bg-emerald-500/10 px-2 py-0.5 rounded w-fit">
+            <span>-43.5% vs Base</span>
           </div>
         </div>
 
       </div>
 
 
-      {/* 2. MIDDLE ROW (Total Transaction, Report, Total Sales matching Image 1 & 2) */}
+      {/* 2. MIDDLE ROW (Salary Progression, Calibration Report, Work Modality Breakdown) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-        {/* Middle Left (Col 5): Total Transaction Weekly overview */}
+        {/* Middle Left (Col 5): Salary Progression by Experience */}
         <div className="lg:col-span-5 rounded-2xl p-6 bg-white border border-slate-200 dark:bg-dark-card dark:border-dark-border shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-base font-semibold text-slate-900 dark:text-white">Total Transaction</h3>
-              <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">Weekly overview</p>
+              <h3 className="text-base font-semibold text-slate-900 dark:text-white">
+                {EXPERIENCE_OVERVIEW.title}
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">
+                {EXPERIENCE_OVERVIEW.subtitle}
+              </p>
             </div>
-            <button className="text-slate-400 hover:text-slate-700 dark:text-gray-400 dark:hover:text-white">
+            <button 
+              onClick={onGoToStatistics}
+              className="text-slate-400 hover:text-slate-700 dark:text-gray-400 dark:hover:text-white"
+              title="View Statistics"
+            >
               <MoreVertical className="h-4 w-4" />
             </button>
           </div>
 
-          {/* Multi-month Column Bars matching reference */}
+          {/* Multi-month / Experience Column Bars matching reference */}
           <div className="flex items-end justify-between gap-3 h-52 pt-6 pb-2 px-2">
-            {TRANSACTION_OVERVIEW.bars.map((item, idx) => (
+            {EXPERIENCE_OVERVIEW.bars.map((item, idx) => (
               <div key={idx} className="flex flex-col items-center gap-2 h-full justify-end flex-1">
-                <span className="text-[11px] font-semibold text-slate-600 dark:text-gray-400">{item.val}K</span>
+                <span className="text-[11px] font-semibold text-slate-600 dark:text-gray-400">${item.val}k</span>
                 <div 
                   className={`w-full max-w-[28px] rounded-lg transition-all duration-300 hover:opacity-90 ${
                     item.highlight 
                       ? 'bg-gradient-to-t from-emerald-600 to-emerald-400 shadow-lg shadow-emerald-500/20' 
                       : 'bg-emerald-100 dark:bg-[#1b342b]'
                   }`}
-                  style={{ height: `${(item.val / 55) * 100}%` }}
+                  style={{ height: `${(item.val / 170) * 100}%` }}
                 />
                 <span className="text-xs text-slate-500 dark:text-gray-400 font-medium">{item.label}</span>
               </div>
@@ -241,15 +253,25 @@ export default function OverviewDashboard({ onOpenPredictor, onGoToDataTable }) 
           </div>
         </div>
 
-        {/* Middle Center (Col 4): Report Last month transactions */}
+        {/* Middle Center (Col 4): Model Calibration & Validation Report */}
         <div className="lg:col-span-4 rounded-2xl p-6 bg-white border border-slate-200 dark:bg-dark-card dark:border-dark-border shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-semibold text-slate-900 dark:text-white">Report</h3>
-              <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">Last month transactions</p>
-              <span className="text-xs font-semibold text-slate-700 dark:text-gray-300 mt-1 block">$23.4K</span>
+              <h3 className="text-base font-semibold text-slate-900 dark:text-white">
+                {CALIBRATION_STATS.title}
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">
+                {CALIBRATION_STATS.subtitle}
+              </p>
+              <span className="text-xs font-semibold text-slate-700 dark:text-gray-300 mt-1 block">
+                {CALIBRATION_STATS.amount}
+              </span>
             </div>
-            <button className="text-slate-400 hover:text-slate-700 dark:text-gray-400 dark:hover:text-white">
+            <button 
+              onClick={onGoToStatistics}
+              className="text-slate-400 hover:text-slate-700 dark:text-gray-400 dark:hover:text-white"
+              title="View Statistics"
+            >
               <MoreVertical className="h-4 w-4" />
             </button>
           </div>
@@ -257,58 +279,72 @@ export default function OverviewDashboard({ onOpenPredictor, onGoToDataTable }) 
           {/* Stats grid */}
           <div className="grid grid-cols-2 gap-4 my-6">
             <div className="rounded-xl p-3 bg-slate-50 border border-slate-200 dark:bg-dark-surface dark:border-dark-border">
-              <div className="h-8 w-8 rounded-lg bg-amber-500/15 dark:bg-rose-500/15 flex items-center justify-center text-amber-600 dark:text-rose-400 mb-2">
-                <DollarSign className="h-4 w-4" />
+              <div className="h-8 w-8 rounded-lg bg-emerald-500/15 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-2">
+                <TrendingUp className="h-4 w-4" />
               </div>
-              <span className="text-xs text-slate-500 dark:text-gray-400">This week</span>
-              <div className="text-sm font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">+82.46%</div>
+              <span className="text-xs text-slate-500 dark:text-gray-400">{CALIBRATION_STATS.stat1.label}</span>
+              <div className="text-sm font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">
+                {CALIBRATION_STATS.stat1.value}
+              </div>
+              <span className="text-[10px] text-slate-400 dark:text-gray-500 block mt-0.5">
+                {CALIBRATION_STATS.stat1.detail}
+              </span>
             </div>
 
             <div className="rounded-xl p-3 bg-slate-50 border border-slate-200 dark:bg-dark-surface dark:border-dark-border">
               <div className="h-8 w-8 rounded-lg bg-teal-500/15 flex items-center justify-center text-teal-600 dark:text-teal-400 mb-2">
-                <Wallet className="h-4 w-4" />
+                <CheckCircle2 className="h-4 w-4" />
               </div>
-              <span className="text-xs text-slate-500 dark:text-gray-400">This week</span>
-              <div className="text-sm font-bold text-rose-500 dark:text-rose-400 mt-0.5">-24.8%</div>
+              <span className="text-xs text-slate-500 dark:text-gray-400">{CALIBRATION_STATS.stat2.label}</span>
+              <div className="text-sm font-bold text-slate-800 dark:text-gray-200 mt-0.5">
+                {CALIBRATION_STATS.stat2.value}
+              </div>
+              <span className="text-[10px] text-slate-400 dark:text-gray-500 block mt-0.5">
+                {CALIBRATION_STATS.stat2.detail}
+              </span>
             </div>
           </div>
 
-          {/* Bottom Performance & View Report button */}
+          {/* Bottom Performance & View Diagnostics button */}
           <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-dark-border">
             <div>
-              <span className="text-xs text-slate-500 dark:text-gray-400">Performance</span>
-              <div className="text-base font-bold text-slate-900 dark:text-white">+94.13%</div>
+              <span className="text-xs text-slate-500 dark:text-gray-400">Coverage (P25–P75)</span>
+              <div className="text-base font-bold text-slate-900 dark:text-white">
+                {CALIBRATION_STATS.performance}
+              </div>
             </div>
             <button 
-              onClick={onGoToDataTable}
+              onClick={onGoToStatistics}
               className="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-dark-surface dark:hover:bg-dark-border dark:text-white transition-colors"
             >
-              View Report
+              View Diagnostics
             </button>
           </div>
         </div>
 
-        {/* Middle Right (Col 3): Total Sales $2,150.00 +5% */}
+        {/* Middle Right (Col 3): Work Modality Pay Premium */}
         <div className="lg:col-span-3 rounded-2xl p-6 bg-white border border-slate-200 dark:bg-dark-card dark:border-dark-border shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="h-6 w-6 rounded-md bg-emerald-500/15 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
                 <TrendingUp className="h-3.5 w-3.5" />
               </div>
-              <span className="text-sm font-semibold text-slate-900 dark:text-white">Total sales</span>
+              <span className="text-sm font-semibold text-slate-900 dark:text-white">Work Modality</span>
             </div>
             <button 
               onClick={onGoToDataTable}
               className="px-2.5 py-1 text-xs rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 dark:bg-dark-surface dark:text-gray-300 dark:hover:text-white dark:border-dark-border"
             >
-              Details
+              Data Table
             </button>
           </div>
 
           <div className="my-3">
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-slate-900 dark:text-white">$2,150.00</span>
-              <span className="text-xs font-semibold text-emerald-700 bg-emerald-100 dark:text-emerald-400 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded">+5%</span>
+              <span className="text-2xl font-bold text-slate-900 dark:text-white">{MODALITY_SALES.amount}</span>
+              <span className="text-xs font-semibold text-emerald-700 bg-emerald-100 dark:text-emerald-400 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                Remote +23%
+              </span>
             </div>
           </div>
 
@@ -316,7 +352,7 @@ export default function OverviewDashboard({ onOpenPredictor, onGoToDataTable }) 
           <div className="h-16 w-full my-2">
             <svg className="w-full h-full" viewBox="0 0 100 40">
               <path
-                d="M 5,30 L 20,15 L 35,22 L 50,8 L 65,18 L 80,12 L 95,2"
+                d="M 5,30 L 20,24 L 35,26 L 50,18 L 65,15 L 80,10 L 95,4"
                 fill="none"
                 stroke="#10b981"
                 strokeWidth="2.5"
@@ -325,86 +361,92 @@ export default function OverviewDashboard({ onOpenPredictor, onGoToDataTable }) 
               />
             </svg>
             <div className="flex justify-between text-[10px] text-slate-400 dark:text-gray-500 mt-1">
-              <span>11:00</span>
-              <span>14:00</span>
-              <span>17:00</span>
-              <span>20:00</span>
+              <span>In-Person</span>
+              <span>Hybrid</span>
+              <span>Remote</span>
             </div>
           </div>
 
-          {/* Store breakdown */}
+          {/* Modality breakdown */}
           <div className="space-y-2 pt-3 border-t border-slate-200 dark:border-dark-border text-xs">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-slate-600 dark:text-gray-300">
-                <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                <span>Online Store</span>
+            {MODALITY_SALES.modalities.map((m, idx) => (
+              <div key={idx} className="flex items-center justify-between">
+                <div className="flex items-center gap-2 text-slate-600 dark:text-gray-300">
+                  <span className={`h-2 w-2 rounded-full ${
+                    idx === 0 ? 'bg-emerald-500' : idx === 1 ? 'bg-blue-400' : 'bg-slate-400 dark:bg-gray-500'
+                  }`} />
+                  <span>{m.name}</span>
+                </div>
+                <div className="flex items-center gap-1 font-semibold text-slate-900 dark:text-white">
+                  <span>{m.amount}</span>
+                  <span className={`text-[10px] ${
+                    idx === 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-400'
+                  }`}>
+                    {m.change}
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center gap-1 font-semibold text-slate-900 dark:text-white">
-                <span>$20k</span>
-                <span className="text-emerald-600 dark:text-emerald-400 text-[11px]">+12.6%</span>
-              </div>
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-slate-600 dark:text-gray-300">
-                <span className="h-2 w-2 rounded-full bg-slate-400 dark:bg-gray-500" />
-                <span>Offline Store</span>
-              </div>
-              <div className="flex items-center gap-1 font-semibold text-slate-900 dark:text-white">
-                <span>$12k</span>
-                <span className="text-rose-500 dark:text-rose-400 text-[11px]">-4.2%</span>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
       </div>
 
 
-      {/* 3. BOTTOM ROW (Upgrade Plan / Predictor, Earning Report, Master Class matching Image 2) */}
+      {/* 3. BOTTOM ROW (Live Prediction Pipeline, Permutation Drivers, SO 2025 Findings) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-        {/* Bottom Left (Col 4): Upgrade your plan / Quantile Model card */}
+        {/* Bottom Left (Col 4): Live Quantile Model Pipeline */}
         <div className="lg:col-span-4 rounded-2xl p-6 bg-white border border-slate-200 dark:bg-dark-card dark:border-dark-border shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <h3 className="text-base font-semibold text-slate-900 dark:text-white">Upgrade your plan</h3>
-            <button className="text-slate-400 hover:text-slate-700 dark:text-gray-400 dark:hover:text-white">
+            <h3 className="text-base font-semibold text-slate-900 dark:text-white">Quantile Salary Estimator</h3>
+            <button 
+              onClick={onOpenPredictor}
+              className="text-slate-400 hover:text-slate-700 dark:text-gray-400 dark:hover:text-white"
+            >
               <MoreVertical className="h-4 w-4" />
             </button>
           </div>
           <p className="text-xs text-slate-500 dark:text-gray-400 mt-1">
-            To fully enjoy all the amazing features and benefits of our premium model pipeline.
+            Deploying 3 quantile regressors (p25, p50, p75) trained on log(salary) across 15,940 developers.
           </p>
 
-          {/* Platinum tier pill card matching reference */}
+          {/* Model info card matching reference layout */}
           <div className="my-5 rounded-xl p-4 bg-slate-50 border border-slate-200 dark:bg-dark-surface dark:border-dark-border flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-lg bg-slate-200 dark:bg-[#252830] flex items-center justify-center text-slate-700 dark:text-gray-200">
-                <CreditCard className="h-5 w-5" />
+              <div className="h-10 w-10 rounded-lg bg-emerald-500/15 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                <Cpu className="h-5 w-5" />
               </div>
               <div>
-                <div className="text-sm font-bold text-slate-900 dark:text-white">Platinum</div>
-                <div className="text-[11px] text-slate-500 dark:text-gray-400">Last 6 months</div>
+                <div className="text-sm font-bold text-slate-900 dark:text-white">HistGB Ensemble</div>
+                <div className="text-[11px] text-slate-500 dark:text-gray-400">15,940 Survey Records</div>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-base font-bold text-slate-900 dark:text-white">$5,550<span className="text-xs font-normal text-slate-500 dark:text-gray-400">/Year</span></div>
+              <div className="text-base font-bold text-emerald-600 dark:text-emerald-400">
+                22<span className="text-xs font-normal text-slate-500 dark:text-gray-400"> Features</span>
+              </div>
             </div>
           </div>
 
-          {/* Payment details with card badges */}
+          {/* Predictor Feature Highlights */}
           <div>
-            <span className="text-xs font-semibold text-slate-500 dark:text-gray-400 block mb-2">Payment details</span>
+            <span className="text-xs font-semibold text-slate-500 dark:text-gray-400 block mb-2">
+              Top Permutation Drivers
+            </span>
             <div className="rounded-xl p-3 bg-slate-50 border border-slate-200 dark:bg-dark-surface dark:border-dark-border flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="h-6 w-9 rounded bg-[#ea001b]/20 flex items-center justify-center font-bold text-[10px] text-rose-600 dark:text-orange-400">
-                  MC
+                <div className="h-6 w-9 rounded bg-emerald-500/20 flex items-center justify-center font-bold text-[10px] text-emerald-700 dark:text-emerald-400">
+                  ML
                 </div>
                 <div>
-                  <div className="text-xs font-medium text-slate-900 dark:text-white">Credit card</div>
-                  <div className="text-[10px] text-slate-500 dark:text-gray-400">5688 xxxx xxxx 2356</div>
+                  <div className="text-xs font-medium text-slate-900 dark:text-white">Country + Experience + Stack</div>
+                  <div className="text-[10px] text-slate-500 dark:text-gray-400">Explains 59.76% log-variance</div>
                 </div>
               </div>
-              <span className="text-xs text-slate-600 dark:text-gray-400 px-2 py-0.5 rounded border border-slate-300 dark:border-dark-border">CVC</span>
+              <span className="text-xs text-slate-600 dark:text-gray-400 px-2 py-0.5 rounded border border-slate-300 dark:border-dark-border">
+                46.2% CI
+              </span>
             </div>
           </div>
 
@@ -417,14 +459,17 @@ export default function OverviewDashboard({ onOpenPredictor, onGoToDataTable }) 
           </button>
         </div>
 
-        {/* Bottom Center (Col 4): Earning Report Weekly Earning overview */}
+        {/* Bottom Center (Col 4): Permutation Feature Importance */}
         <div className="lg:col-span-4 rounded-2xl p-6 bg-white border border-slate-200 dark:bg-dark-card dark:border-dark-border shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-semibold text-slate-900 dark:text-white">Earning Report</h3>
-              <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">Weekly Earning overview</p>
+              <h3 className="text-base font-semibold text-slate-900 dark:text-white">Key Salary Drivers</h3>
+              <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">Permutation Importance on Test Set</p>
             </div>
-            <button className="text-slate-400 hover:text-slate-700 dark:text-gray-400 dark:hover:text-white">
+            <button 
+              onClick={onGoToStatistics}
+              className="text-slate-400 hover:text-slate-700 dark:text-gray-400 dark:hover:text-white"
+            >
               <MoreVertical className="h-4 w-4" />
             </button>
           </div>
@@ -432,59 +477,59 @@ export default function OverviewDashboard({ onOpenPredictor, onGoToDataTable }) 
           {/* Breakdown items matching reference */}
           <div className="space-y-4 my-6">
             
-            {/* Net profit */}
+            {/* Country */}
             <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200 dark:bg-dark-surface dark:border-dark-border">
               <div className="flex items-center gap-3">
                 <div className="h-9 w-9 rounded-lg bg-blue-500/15 flex items-center justify-center text-blue-600 dark:text-blue-400">
-                  <TrendingUp className="h-4 w-4" />
+                  <Globe2 className="h-4 w-4" />
                 </div>
                 <div>
-                  <div className="text-xs font-semibold text-slate-900 dark:text-white">Net profit</div>
-                  <div className="text-[11px] text-slate-500 dark:text-gray-400">Sales</div>
+                  <div className="text-xs font-semibold text-slate-900 dark:text-white">{FEATURE_IMPORTANCE.country.name}</div>
+                  <div className="text-[11px] text-slate-500 dark:text-gray-400">{FEATURE_IMPORTANCE.country.detail}</div>
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-xs font-bold text-slate-900 dark:text-white">$1,623</div>
+                <div className="text-xs font-bold text-slate-900 dark:text-white">{FEATURE_IMPORTANCE.country.score}</div>
                 <div className="text-[11px] text-emerald-600 dark:text-emerald-400 flex items-center justify-end gap-0.5">
-                  <ArrowUpRight className="h-3 w-3" /> 20.3%
+                  <ArrowUpRight className="h-3 w-3" /> Dominant
                 </div>
               </div>
             </div>
 
-            {/* Total income */}
+            {/* Work Exp */}
             <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200 dark:bg-dark-surface dark:border-dark-border">
               <div className="flex items-center gap-3">
                 <div className="h-9 w-9 rounded-lg bg-emerald-500/15 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
-                  <DollarSign className="h-4 w-4" />
+                  <TrendingUp className="h-4 w-4" />
                 </div>
                 <div>
-                  <div className="text-xs font-semibold text-slate-900 dark:text-white">Total income</div>
-                  <div className="text-[11px] text-slate-500 dark:text-gray-400">Sales, Affiliation</div>
+                  <div className="text-xs font-semibold text-slate-900 dark:text-white">{FEATURE_IMPORTANCE.workExp.name}</div>
+                  <div className="text-[11px] text-slate-500 dark:text-gray-400">{FEATURE_IMPORTANCE.workExp.detail}</div>
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-xs font-bold text-slate-900 dark:text-white">$5,600</div>
+                <div className="text-xs font-bold text-slate-900 dark:text-white">{FEATURE_IMPORTANCE.workExp.score}</div>
                 <div className="text-[11px] text-emerald-600 dark:text-emerald-400 flex items-center justify-end gap-0.5">
-                  <ArrowUpRight className="h-3 w-3" /> 16.2%
+                  <ArrowUpRight className="h-3 w-3" /> Seniority
                 </div>
               </div>
             </div>
 
-            {/* Total expense */}
+            {/* Languages */}
             <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200 dark:bg-dark-surface dark:border-dark-border">
               <div className="flex items-center gap-3">
-                <div className="h-9 w-9 rounded-lg bg-rose-500/15 flex items-center justify-center text-rose-600 dark:text-rose-400">
-                  <Wallet className="h-4 w-4" />
+                <div className="h-9 w-9 rounded-lg bg-purple-500/15 flex items-center justify-center text-purple-600 dark:text-purple-400">
+                  <Layers className="h-4 w-4" />
                 </div>
                 <div>
-                  <div className="text-xs font-semibold text-slate-900 dark:text-white">Total expense</div>
-                  <div className="text-[11px] text-slate-500 dark:text-gray-400">ADVT, Operational</div>
+                  <div className="text-xs font-semibold text-slate-900 dark:text-white">{FEATURE_IMPORTANCE.languages.name}</div>
+                  <div className="text-[11px] text-slate-500 dark:text-gray-400">{FEATURE_IMPORTANCE.languages.detail}</div>
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-xs font-bold text-slate-900 dark:text-white">$3,200</div>
-                <div className="text-[11px] text-rose-600 dark:text-rose-400 flex items-center justify-end gap-0.5">
-                  <ArrowUpRight className="h-3 w-3" /> 10.5%
+                <div className="text-xs font-bold text-slate-900 dark:text-white">{FEATURE_IMPORTANCE.languages.score}</div>
+                <div className="text-[11px] text-emerald-600 dark:text-emerald-400 flex items-center justify-end gap-0.5">
+                  <ArrowUpRight className="h-3 w-3" /> +$1,064 CV
                 </div>
               </div>
             </div>
@@ -492,49 +537,50 @@ export default function OverviewDashboard({ onOpenPredictor, onGoToDataTable }) 
           </div>
 
           <div className="pt-2 text-[11px] text-slate-500 dark:text-gray-400 flex items-center justify-between">
-            <span>Model Calibration: 46.2% coverage</span>
-            <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Nominal 50.0%</span>
+            <span>Decision: CV gain $1,064 &gt; std $163</span>
+            <span className="text-emerald-600 dark:text-emerald-400 font-semibold">v2 Features Selected</span>
           </div>
         </div>
 
-        {/* Bottom Right (Col 4): Design strategy master class card */}
+        {/* Bottom Right (Col 4): Stack Overflow 2025 Key Findings */}
         <div className="lg:col-span-4 rounded-2xl p-6 bg-white border border-slate-200 dark:bg-dark-card dark:border-dark-border shadow-xs flex flex-col justify-between overflow-hidden">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <img 
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&h=60&fit=crop" 
-                alt="Instructor" 
-                className="h-8 w-8 rounded-full object-cover ring-1 ring-slate-300 dark:ring-gray-600" 
-              />
+              <div className="h-8 w-8 rounded-full bg-emerald-500/15 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-bold text-xs">
+                SO
+              </div>
               <div>
-                <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Design strategy master class</h3>
-                <p className="text-[11px] text-slate-500 dark:text-gray-400">07 Jun 2025 at 10:00 PM</p>
+                <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Survey Insights & Trends</h3>
+                <p className="text-[11px] text-slate-500 dark:text-gray-400">Stack Overflow 2025 Developer Study</p>
               </div>
             </div>
-            <button className="text-slate-400 hover:text-slate-700 dark:text-gray-400 dark:hover:text-white">
+            <button 
+              onClick={onGoToStatistics}
+              className="text-slate-400 hover:text-slate-700 dark:text-gray-400 dark:hover:text-white"
+            >
               <MoreVertical className="h-4 w-4" />
             </button>
           </div>
 
-          {/* Photo with 12 Dec Badge matching Image 2 */}
+          {/* Photo with SO 2025 Badge */}
           <div className="relative my-4 rounded-xl overflow-hidden h-36 bg-slate-100 dark:bg-gray-900 border border-slate-200 dark:border-dark-border">
             <img 
               src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=300&fit=crop" 
-              alt="Class session" 
+              alt="Developer engineering team" 
               className="w-full h-full object-cover" 
             />
             <div className="absolute left-3 top-3 bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-center border border-white/10">
-              <span className="text-xs font-bold text-white block">12</span>
-              <span className="text-[9px] text-gray-400 uppercase font-medium">Dec</span>
+              <span className="text-xs font-bold text-white block">2025</span>
+              <span className="text-[9px] text-emerald-400 uppercase font-medium">SO</span>
             </div>
           </div>
 
           <div>
             <h4 className="text-xs font-semibold text-slate-900 dark:text-white">
-              How to improve your next design's compensation value
+              Key Empirical Takeaways from 15,940 Developers
             </h4>
             <p className="text-[11px] text-slate-500 dark:text-gray-400 mt-1 line-clamp-2">
-              Empirical insights from the 2025 Developer Survey on high-value skills, cloud frameworks, and leadership roles.
+              US developers lead with a $150k median, followed by UK ($91.1k) and Germany ($87.0k). Modern languages (Rust, Go) provide a statistically validated CV gain over base features.
             </p>
           </div>
         </div>

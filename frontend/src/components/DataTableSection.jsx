@@ -9,6 +9,7 @@ import {
   Download, 
   ChevronLeft, 
   ChevronRight,
+  Sparkles,
   Plus
 } from 'lucide-react';
 import { INITIAL_TABLE_DATA } from '../data/mockData';
@@ -27,7 +28,8 @@ export default function DataTableSection({ onOpenPredictor }) {
       item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.role.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.country.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.id.toLowerCase().includes(searchQuery.toLowerCase());
+      item.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (item.languages && item.languages.toLowerCase().includes(searchQuery.toLowerCase()));
     
     const matchesStatus = 
       statusFilter === 'All' || 
@@ -96,7 +98,8 @@ export default function DataTableSection({ onOpenPredictor }) {
               onClick={onOpenPredictor}
               className="h-9 px-4 rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900 font-semibold text-xs hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-xs"
             >
-              <span>Create Invoice</span>
+              <Sparkles className="h-3.5 w-3.5 text-emerald-400" />
+              <span>Predict Record</span>
             </button>
           </div>
 
@@ -106,7 +109,7 @@ export default function DataTableSection({ onOpenPredictor }) {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-400 dark:text-gray-400" />
               <input
                 type="text"
-                placeholder="Search client"
+                placeholder="Search role, country, name..."
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
@@ -125,7 +128,7 @@ export default function DataTableSection({ onOpenPredictor }) {
               }}
               className="h-9 px-3 rounded-lg border border-slate-200 bg-slate-50 text-xs font-medium text-slate-700 dark:border-dark-border dark:bg-dark-surface dark:text-gray-300 focus:outline-none cursor-pointer"
             >
-              <option value="All">All</option>
+              <option value="All">All Status</option>
               <option value="Paid">Paid</option>
               <option value="Pending">Pending</option>
             </select>
@@ -148,10 +151,10 @@ export default function DataTableSection({ onOpenPredictor }) {
                 </th>
                 <th className="py-3.5 px-4">ID</th>
                 <th className="py-3.5 px-4 text-center">Status</th>
-                <th className="py-3.5 px-4">Client</th>
-                <th className="py-3.5 px-4">Total</th>
-                <th className="py-3.5 px-4">Issued Date</th>
-                <th className="py-3.5 px-4">Balance</th>
+                <th className="py-3.5 px-4">Developer & Role</th>
+                <th className="py-3.5 px-4">Compensation</th>
+                <th className="py-3.5 px-4">Country & Modality</th>
+                <th className="py-3.5 px-4">Status</th>
                 <th className="py-3.5 px-4 text-right">Actions</th>
               </tr>
             </thead>
@@ -203,7 +206,7 @@ export default function DataTableSection({ onOpenPredictor }) {
                         </div>
                       </td>
 
-                      {/* Client (Avatar, Name, Role) */}
+                      {/* Developer (Avatar, Name, Role) */}
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-3">
                           <img 
@@ -222,14 +225,17 @@ export default function DataTableSection({ onOpenPredictor }) {
                         </div>
                       </td>
 
-                      {/* Total */}
+                      {/* Compensation */}
                       <td className="py-3 px-4 font-semibold text-slate-900 dark:text-white">
                         {item.total}
                       </td>
 
-                      {/* Issued Date */}
+                      {/* Country & Modality */}
                       <td className="py-3 px-4 text-slate-500 dark:text-gray-400 font-medium">
-                        {item.issuedDate}
+                        <div>
+                          <span className="text-slate-800 dark:text-gray-200 font-medium block">{item.country}</span>
+                          <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium">{item.remote} · {item.experience}y exp</span>
+                        </div>
                       </td>
 
                       {/* Balance Badge matching reference */}
@@ -327,32 +333,32 @@ export default function DataTableSection({ onOpenPredictor }) {
       <div className="rounded-2xl bg-white border border-slate-200 dark:bg-dark-card dark:border-dark-border shadow-xs overflow-hidden p-6 space-y-4">
         
         <div>
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white">Basic Data Table</h2>
-          <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">Developer Compensation & Payment Gateway Mapping</p>
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white">Developer Compensation & Gateway Records</h2>
+          <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">Stack Overflow 2025 cohort samples with verified compensation & payment gateway data</p>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
               <tr className="border-b border-slate-200 dark:border-dark-border text-[11px] font-semibold text-slate-500 dark:text-gray-400 uppercase">
-                <th className="py-3 px-4">Customer</th>
-                <th className="py-3 px-4">Amount</th>
+                <th className="py-3 px-4">Developer</th>
+                <th className="py-3 px-4">Annual Compensation</th>
                 <th className="py-3 px-4">Status</th>
-                <th className="py-3 px-4">Paid by</th>
+                <th className="py-3 px-4">Payment Method</th>
                 <th className="py-3 px-4 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-200 dark:divide-dark-border">
               {[
-                { name: "Jack Alfredo", email: "jack@shadcnstudio.com", amount: "$316.00", status: "Paid", card: "Mastercard" },
-                { name: "Maria Gonzalez", email: "maria.g@shadcnstudio.com", amount: "$253.40", status: "Pending", card: "Visa" },
-                { name: "John Doe", email: "john.doe@shadcnstudio.com", amount: "$852.00", status: "Paid", card: "Mastercard" },
-                { name: "Emily Carter", email: "emily.carter@shadcnstudio.com", amount: "$889.00", status: "Pending", card: "Visa" },
-                { name: "David Lee", email: "david.lee@shadcnstudio.com", amount: "$723.16", status: "Paid", card: "Mastercard" }
+                { name: "Jack Alfredo", email: "jack.alfredo@dev2025.org", amount: "$145,000", status: "Paid", card: "Mastercard" },
+                { name: "Maria Gonzalez", email: "maria.g@dev2025.org", amount: "$87,000", status: "Pending", card: "Visa" },
+                { name: "John Doe", email: "john.doe@dev2025.org", amount: "$92,500", status: "Paid", card: "Mastercard" },
+                { name: "Emily Carter", email: "emily.carter@dev2025.org", amount: "$165,000", status: "Pending", card: "Visa" },
+                { name: "David Lee", email: "david.lee@dev2025.org", amount: "$58,000", status: "Paid", card: "Mastercard" }
               ].map((row, i) => (
                 <tr key={i} className="hover:bg-slate-50 dark:hover:bg-[#1e2025] transition-colors">
                   
-                  {/* Customer (Avatar + Name + Email) */}
+                  {/* Developer (Avatar + Name + Email) */}
                   <td className="py-3 px-4">
                     <div className="flex items-center gap-3">
                       <div className="h-8 w-8 rounded-full bg-slate-200 dark:bg-gray-800 flex items-center justify-center font-bold text-slate-700 dark:text-gray-300">
