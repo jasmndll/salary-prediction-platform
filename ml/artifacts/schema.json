@@ -96,68 +96,66 @@
     "Work_Experience_Years": {
       "min": 1.0,
       "max": 100.0
-    }
-  },
-  "languages": {
+    },
     "JavaScript": {
-      "min": 0,
-      "max": 1
+      "min": 0.0,
+      "max": 1.0
     },
     "HTML/CSS": {
-      "min": 0,
-      "max": 1
+      "min": 0.0,
+      "max": 1.0
     },
     "SQL": {
-      "min": 0,
-      "max": 1
+      "min": 0.0,
+      "max": 1.0
     },
     "Python": {
-      "min": 0,
-      "max": 1
+      "min": 0.0,
+      "max": 1.0
     },
     "Bash/Shell (all shells)": {
-      "min": 0,
-      "max": 1
+      "min": 0.0,
+      "max": 1.0
     },
     "TypeScript": {
-      "min": 0,
-      "max": 1
+      "min": 0.0,
+      "max": 1.0
     },
     "C#": {
-      "min": 0,
-      "max": 1
+      "min": 0.0,
+      "max": 1.0
     },
     "Java": {
-      "min": 0,
-      "max": 1
+      "min": 0.0,
+      "max": 1.0
     },
     "PowerShell": {
-      "min": 0,
-      "max": 1
+      "min": 0.0,
+      "max": 1.0
     },
     "C++": {
-      "min": 0,
-      "max": 1
+      "min": 0.0,
+      "max": 1.0
     },
     "Go": {
-      "min": 0,
-      "max": 1
+      "min": 0.0,
+      "max": 1.0
     },
     "C": {
-      "min": 0,
-      "max": 1
+      "min": 0.0,
+      "max": 1.0
     },
     "PHP": {
-      "min": 0,
-      "max": 1
+      "min": 0.0,
+      "max": 1.0
     },
     "Rust": {
-      "min": 0,
-      "max": 1
+      "min": 0.0,
+      "max": 1.0
     },
     "Kotlin": {
-      "min": 0,
-      "max": 1
+      "min": 0.0,
+      "max": 1.0
     }
   }
 }

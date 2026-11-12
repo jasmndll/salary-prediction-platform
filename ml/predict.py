@@ -39,7 +39,7 @@ def validate_payload(payload: dict, schema: dict, feature_columns: list) -> None
         if col not in payload:
             raise ValueError(f"Missing required field: '{col}'")
 
-    # Validate categorical fields
+    # Validate categorical fields against allowed categories from training data
     for col, allowed_categories in schema.get("categorical", {}).items():
         val = payload[col]
         if str(val) not in allowed_categories:
@@ -47,7 +47,7 @@ def validate_payload(payload: dict, schema: dict, feature_columns: list) -> None
                 f"Unknown category for '{col}': '{val}'. Allowed categories are: {allowed_categories}"
             )
 
-    # Validate numeric fields
+    # Validate numeric fields against min and max bounds
     for col, bounds in schema.get("numeric", {}).items():
         val = payload[col]
         if isinstance(val, bool) or not isinstance(val, (int, float)):
@@ -57,16 +57,6 @@ def validate_payload(payload: dict, schema: dict, feature_columns: list) -> None
         if val < min_val or val > max_val:
             raise ValueError(
                 f"Numeric field '{col}' value {val} is out of allowed range [{min_val}, {max_val}]"
-            )
-
-    # Validate language fields
-    for col, bounds in schema.get("languages", {}).items():
-        val = payload[col]
-        if isinstance(val, bool) or not isinstance(val, (int, float)):
-            raise ValueError(f"Language field '{col}' must be 0 or 1, got {type(val).__name__}")
-        if val not in (0, 1):
-            raise ValueError(
-                f"Language field '{col}' value {val} is out of allowed range [0, 1]"
             )
 
 
